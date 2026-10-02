@@ -1,19 +1,37 @@
 # E-Commerce Sales & Profitability Analytics Dashboard
 
-An end-to-end business intelligence project modeling transactional retail data to analyze revenue trends, regional profit drivers, pricing elasticity, and customer concentration using **SQL Server**, **Power BI**, and **DAX**.
+An end-to-end data analytics project taking raw retail transactional data through SQL Server, data modeling, custom DAX logic, and an interactive 2-page Power BI dashboard.
+
+> **Dataset & Tools Note:**
+> * **Data Source:** Raw e-commerce dataset sourced from **Kaggle**.
+> * **Workflow Acceleration:** Built and optimized with the help of **AI (Gemini and Claude)** for query refinement, DAX pattern drafting, and dashboard architecture.
 
 ---
 
-## 📌 Business Requirements & Questions Answered
+## 📌 Project Overview
 
-1. **Trend Analysis:** How are sales and profit trending Month-over-Month (MoM) and Year-over-Year (YoY)?
-2. **Geographic & Category Contribution:** Which regions and product categories drive the highest net margin?
-3. **Discount Elasticity:** Does discounting increase transaction volume or erode profit margins?
-4. **Customer Concentration:** Who are the top customers, and how concentrated is total revenue?
-5. **Channel Preferences:** Which payment modes do customers prefer for order volume and order value?
+The objective of this project was to move beyond simple surface-level charts and build a production-style reporting setup that answers core commercial business questions:
+
+1. **Trend Performance:** How are sales and net profit tracking Month-over-Month (MoM) and Year-over-Year (YoY)?
+2. **Regional & Category Drivers:** Which regions and product lines generate solid profit margins versus low returns?
+3. **Discount Impact:** Does offering higher discounts genuinely drive transaction volume, or does it simply erode margins?
+4. **Customer Concentration:** Who are the top 10 customers, and how much revenue relies on them?
+5. **Payment Method Breakdown:** What payment modes (UPI, Credit Card, COD, Net Banking) do customers prefer for order volume and order value?
 
 ---
 
+## 🏗️ Technical Workflow
+
+[ Kaggle Raw CSV ] 
+        │
+        ▼
+[ Microsoft SQL Server (SSMS) ] ── (Staging Table ➔ Data Cleaning ➔ Sanity Checks ➔ SQL Queries)
+        │
+        ▼
+[ Power BI Desktop ] ──────────── (Star Schema Model ➔ Dynamic Dim_Date ➔ Custom DAX Measures)
+        │
+        ▼
+[ Business Report ] ───────────── (2-Page Synchronized Executive Dashboard)
 ## 📊 Dashboard Pages & Visuals
 
 ### Page 1: Executive Overview
@@ -42,7 +60,7 @@ The report implements a Star Schema model rather than relying on a flat tabular 
 
 ## 📐 Key DAX Measures
 
-```dax
+
 // Base Aggregations
 Total Sales = SUM('ecommerce data'[Sales])
 Total Profit = SUM('ecommerce data'[Profit])
@@ -62,4 +80,4 @@ CALCULATE([Total Sales], DATEADD(Dim_Date[Date], -1, MONTH))
 
 MoM Sales Growth % = 
 DIVIDE([Total Sales] - [Sales PM], [Sales PM], 0)
-```
+
